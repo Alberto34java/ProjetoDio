@@ -42,7 +42,7 @@ namespace ProdutosApi.Controllers
         {
             _services.Salvar(produto);
 
-            return produto;
+            return CreatedAtRoute("ExibirProduto", new {id => produto.Id.ToString()}, produto);
         }
         //=> _services.Salvar(produto);
 
