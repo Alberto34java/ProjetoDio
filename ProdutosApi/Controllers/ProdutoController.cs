@@ -18,18 +18,63 @@ namespace ProdutosApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Produto>> Listar()=>_services.ListarProdutos();
+        public ActionResult<List<Produto>> Listar()
+        {
+            return _services.ListarProdutos();
+        }
+        //=>_services.ListarProdutos();
 
-        [HttpGet("{id}")]
-        public ActionResult<Produto> ExibirProduto(string id)=> _services.ExibirProduto(id);
+        [HttpGet("{id:length(24)}"), Name = "ExibirProduto"]
+        public ActionResult<Produto> ExibirProduto(string id)
+        {
+           var p=_services.ExibirProduto(id);
+
+           if(p == null)
+           {
+               return NotFound();
+           }   
+
+           return p;     
+        }
+        //=> _services.ExibirProduto(id);
         [HttpPost]
-        public ActionResult<Produto> Salvar(Produto produto)=> _services.Salvar(produto);
+        public ActionResult<Produto> Salvar(Produto produto)
+        {
+            _services.Salvar(produto);
 
-        [HttpPut]
-        public ActionResult<Produto> Atualizar(string id,Produto produto)=>
-        _services.AtualizarProduto(id,produto);
+            return produto;
+        }
+        //=> _services.Salvar(produto);
 
-        [HttpDelete]
-        public ActionResult<Produto> Delete(string id)=> _services.RemoverProduto(id);
+        [HttpPut("{id:length(24)}")]
+        public ActionResult<Produto> Atualizar(string id,Produto produto)
+        {
+             var p= _services.ExibirProduto(produto);
+
+             if(p == null)
+             {
+                 return NotFound();
+             }
+
+             _services.AtualizarProduto(id,produto);
+
+             return NoContent();
+        }
+        //=>_services.AtualizarProduto(id,produto);
+
+        [HttpDelete("{id:length(24)}")]
+        public ActionResult<Produto> Delete(string id)
+        {
+            var p= _services.ExibirProduto(id);
+
+            if(p == null)
+            {
+                return NotFound();
+
+            }
+            _services.RemoverProduto(id);
+
+            return NoContent();
+        }
     }
 }
