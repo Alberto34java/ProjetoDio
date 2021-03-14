@@ -20,7 +20,7 @@ namespace ProdutosApi.Controllers
         [HttpGet]
         public ActionResult<List<Produto>> Listar()=>_services.ListarProdutos();
 
-        [HttpGet("{id:length(24)}")]
+        [HttpGet("{id}")]
         public ActionResult<Produto> ExibirProduto(string id)=> _services.ExibirProduto(id);
         [HttpPost]
         public ActionResult<Produto> Salvar(Produto produto)=> _services.Salvar(produto);

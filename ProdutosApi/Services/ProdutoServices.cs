@@ -29,18 +29,23 @@ namespace ProdutosApi.Services
         }
 
         //metodo de alteração só para 
-        public Produto AtualizarProduto(string id, Produto p)
+        public void AtualizarProduto(string id, Produto p)
         {
-            _produtos.ReplaceOne(id,p);
-            return p;
+            _produtos.ReplaceOne(produto=> produto.Id == id, p);
+            
         }
 
         //Metodo de Remoção
-        public Produto RemoverProduto(string id)
+        public void RemoverProduto(string id)
         {
-            var p=_produtos.Find(produto => produto.Id == id).FirstOrDefault();
+            //var p=_produtos.Find(produto => produto.Id == id).FirstOrDefault();
             _produtos.DeleteOne(produto => produto.Id == id);
-            return p;
+            //return p;
         } 
+
+        public void Remover(Produto p)
+        {
+           _produtos.DeleteOne(produto => produto.Id == produto.Id);
+        }
     }
 }
