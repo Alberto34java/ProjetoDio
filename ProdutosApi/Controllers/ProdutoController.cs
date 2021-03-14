@@ -24,7 +24,7 @@ namespace ProdutosApi.Controllers
         }
         //=>_services.ListarProdutos();
 
-        [HttpGet("{id:length(24)}"), Name = "ExibirProduto"]
+        [HttpGet("{id:length(24)}", Name = "ExibirProduto")]
         public ActionResult<Produto> ExibirProduto(string id)
         {
            var p=_services.ExibirProduto(id);
@@ -42,14 +42,14 @@ namespace ProdutosApi.Controllers
         {
             _services.Salvar(produto);
 
-            return CreatedAtRoute("ExibirProduto", new {id => produto.Id.ToString()}, produto);
+            return CreatedAtRoute("ExibirProduto", new { id = produto.Id.ToString() }, produto);
         }
         //=> _services.Salvar(produto);
 
         [HttpPut("{id:length(24)}")]
         public ActionResult<Produto> Atualizar(string id,Produto produto)
         {
-             var p= _services.ExibirProduto(produto);
+             var p= _services.ExibirProduto(id);
 
              if(p == null)
              {

@@ -18,8 +18,14 @@ namespace ProdutosApi.Services
          }
 
          public List<Produto> ListarProdutos()=> _produtos.Find( Produto => true).ToList();
+         
+             //_produtos.Find( Produto => true).ToList();
+         
+         //=> _produtos.Find( Produto => true).ToList();
         //metodo para mostrar Novela Selecionada 
         public Produto ExibirProduto(string id)=> _produtos.Find(produto=> produto.Id == id).FirstOrDefault();
+        
+        //=> _produtos.Find(produto=> produto.Id == id).FirstOrDefault();
 
         //metodo de salvar 
         public Produto Salvar(Produto produto)
